@@ -176,9 +176,14 @@ class UnfoldAdminReadonlyField(helpers.AdminReadonlyField):
 class UnfoldAdminField(helpers.AdminField):
     def label_tag(self) -> SafeText:
         classes = []
-        if not self.field.field.widget.__class__.__name__.startswith(
-            "Unfold"
-        ) and not self.field.field.widget.template_name.startswith("unfold"):
+
+        try:
+            if not self.field.field.widget.__class__.__name__.startswith(
+                "Unfold"
+            ) and not self.field.field.widget.template_name.startswith("unfold"):
+                return super().label_tag()
+        # NOTE: this fixes a bug related to a django-cms plugin (djangocms-link), widget has no template_name
+        except AttributeError:
             return super().label_tag()
 
         # TODO load config from current AdminSite (override Fieldline.__iter__ method)
