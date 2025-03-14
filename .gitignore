@@ -7,3 +7,5 @@ venv
 node_modules
 dist/
 *.sqlite3
+
+tags
