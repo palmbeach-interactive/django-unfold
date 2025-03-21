@@ -18,3 +18,40 @@ class UnfoldVersatileImageAdmin(admin.ModelAdmin):
             if field_name in form.base_fields:
                 form.base_fields[field_name].widget = VersatileImagePPOIClickWidget()
         return form
+
+
+class UnfoldVersatileImageTabularInline(admin.TabularInline):
+    def get_formset(self, request, obj=None, **kwargs):
+        formset = super().get_formset(request, obj, **kwargs)
+
+        # Get all VersatileImageFields from the model
+        image_fields = [
+            field.name for field in self.model._meta.fields
+            if isinstance(field, VersatileImageField)
+        ]
+
+        # Apply widget to each VersatileImageField in the form
+        for field_name in image_fields:
+            if field_name in formset.form.base_fields:
+                formset.form.base_fields[field_name].widget = VersatileImagePPOIClickWidget()
+
+        return formset
+
+
+class UnfoldVersatileImageStackedInline(admin.StackedInline):
+    def get_formset(self, request, obj=None, **kwargs):
+        formset = super().get_formset(request, obj, **kwargs)
+
+        # Get all VersatileImageFields from the model
+        image_fields = [
+            field.name for field in self.model._meta.fields
+            if isinstance(field, VersatileImageField)
+        ]
+
+        # Apply widget to each VersatileImageField in the form
+        for field_name in image_fields:
+            if field_name in formset.form.base_fields:
+                formset.form.base_fields[field_name].widget = VersatileImagePPOIClickWidget()
+
+        return formset
+
