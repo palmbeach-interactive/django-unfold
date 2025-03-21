@@ -62,14 +62,15 @@
         {% endif %}
 
         {% if is_popup %}
-            {% block object-tools %}
-            <div class="object-tools flex w-full justify-end my-4">
-                {% block object-tools-items %}
-                {% change_list_object_tools %}
-                {% endblock %}
-            </div>
+            {% block object-tools-popup %}
+              <div class="object-tools flex w-full justify-end my-4">
+                  {% block object-tools-items-popup %}
+                    {% change_list_object_tools %}
+                  {% endblock %}
+              </div>
             {% endblock %}
         {% endif %}
+
 
         <div class="flex -mx-4 module{% if cl.has_filters %} filtered{% endif %}" id="changelist" x-data="{ changeListWidth: 0 }">
             <div class="changelist-form-container flex flex-row flex-grow gap-6 min-w-0 px-4">
