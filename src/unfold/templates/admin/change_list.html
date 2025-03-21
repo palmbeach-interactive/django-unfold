@@ -61,6 +61,16 @@
             {{ cl.formset.non_form_errors }}
         {% endif %}
 
+        {% if is_popup %}
+            {% block object-tools %}
+            <div class="object-tools flex w-full justify-end my-4">
+                {% block object-tools-items %}
+                {% change_list_object_tools %}
+                {% endblock %}
+            </div>
+            {% endblock %}
+        {% endif %}
+
         <div class="flex -mx-4 module{% if cl.has_filters %} filtered{% endif %}" id="changelist" x-data="{ changeListWidth: 0 }">
             <div class="changelist-form-container flex flex-row flex-grow gap-6 min-w-0 px-4">
                 <div class="flex-grow min-w-0 lg:pb-16" x-resize="changeListWidth = $width">
